@@ -23,10 +23,10 @@ const searchbarSchema = new mongoose.Schema({
   images : Array,
 
   })
-  let searchbar = mongoose.model('data', searchbarSchema)
+  let searchbar = mongoose.model('restuarant', searchbarSchema, 'data' )
 
   let readData = (obj, cb) => {
-    searchbar.findOne(obj, function(err,data){
+    searchbar.findOne(obj,(err,data) => {
       if(err) {
         console.log(err)
       } else {
@@ -35,30 +35,42 @@ const searchbarSchema = new mongoose.Schema({
     })
   }
 
-  let createData = () => {
-    insertOne
+  let createData = (obj,cb) => {
+    searchbar.insertOne(obj, (err,data) => {
+      if(err){
+        console.log('error in insert data to DB', err)
+      } else {
+        console.log('data successfully added to data base', data)
+        cb(null,data)
+      }
+    })
   };
 
-  let updateData = () => {
-    updateOne
-  }
+  let updateData = (obj,cb) => {
+    searchbar.updateOne(obj, (err,data) => {
+      if(err) {
+        console.log('error in updating data from DB', err);
+      } else {
+        console.log('data successfully updated in DB', data);
+        cb(null,data);
+      }
+    })
+  };
 
-  let deleteData = (obj) => {
+  let deleteData = (obj, cb) => {
     searchbar.deleteOne(obj, (err,data) => {
       if(err) {
         console.log('error in deleting data from DB', err)
       } else {
         console.log('sucessfully deleted data from DB', data)
+        cb(null,data);
       }
-
     })
-  }
+  };
 
 
 
-
-
-module.exports = {searchbar, readData, deleteData};
+module.exports = {searchbar, readData, deleteData,  createData, updateData};
 
 
 
