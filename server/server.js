@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyparser = require('body-parser');
 const port = 3005
-const {seed, model} = require('../db');
+const {readData, model, deleteData} = require('../db');
 const fs = require('fs');
 const cors = require('cors')
 require('dotenv').config();
@@ -52,3 +52,26 @@ app.post('/api', (req, res)=>{
         })
     }
 })
+
+app.get('/readRecord', (req,res) => {
+    db.readData({uuid: req.query.uuid}, (err,data) => {
+        if(err){
+            console.log('error in retrieve data in server side', err);
+        } else {
+            res.send(data)
+            console.log('/retieve data in server side', data)
+        }
+    })
+ });
+
+ app.delete('/deleteRecord', (req,res) => {
+     db.deleteData({uuid: req.query.uuid}, (err,data) => {
+         if(err) {
+             console.log('error in deleting data in server side', err);
+         } else {
+             res.send(data)
+             console.log('/deleteRecord in server side', data);
+         }
+     })
+ })
+
