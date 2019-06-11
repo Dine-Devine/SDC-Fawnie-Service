@@ -36,7 +36,7 @@ const searchbarSchema = new mongoose.Schema({
   }
 
   let createData = (obj,cb) => {
-    searchbar.insertOne(obj, (err,data) => {
+    searchbar.create(obj, (err,data) => {
       if(err){
         console.log('error in insert data to DB', err)
       } else {
@@ -46,8 +46,8 @@ const searchbarSchema = new mongoose.Schema({
     })
   };
 
-  let updateData = (obj,cb) => {
-    searchbar.updateOne(obj, (err,data) => {
+  let updateData = (target, obj,cb) => {
+    searchbar.updateOne(target, obj, (err,data) => {
       if(err) {
         console.log('error in updating data from DB', err);
       } else {
