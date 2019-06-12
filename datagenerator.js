@@ -5,19 +5,19 @@ const fs = require('fs');
 // create data for csv file for post gres data base
 // used pipe to seperate data as , is not suffiecient due to commas in name field
 
-const dataCreator = () => {
+// const dataCreator = () => {
 
-    for (let i = 0; i < 10000000; i++) {
-        let data = `${i+1}| "${faker.fake("{{company.companyName}}")}"| "${["Italian", "Mexican", "Thai", "Japanese", "Tex-Mex", "Seafood", "Diner"][Math.floor(Math.random()*7)]}"| "${["Breakfast", "Lunch", "Dinner"][Math.floor(Math.random()*3)]}"| "${faker.fake("{{image.food}}")}" \n`
+//     for (let i = 0; i < 10000000; i++) {
+//         let data = `${i+1}| "${faker.fake("{{company.companyName}}")}"| "${["Italian", "Mexican", "Thai", "Japanese", "Tex-Mex", "Seafood", "Diner"][Math.floor(Math.random()*7)]}"| "${["Breakfast", "Lunch", "Dinner"][Math.floor(Math.random()*3)]}"| "${faker.fake("{{image.food}}")}" \n`
 
-        fs.appendFileSync('data1.csv', data, (err) => {
-            if (err) {
-                console.log('error', err);
-            }
-        })
+//         fs.appendFileSync('data1.csv', data, (err) => {
+//             if (err) {
+//                 console.log('error', err);
+//             }
+//         })
         
-    };
-}
+//     };
+// }
 
 // invoke datacreator so function can generate data for csv file
 //dataCreator();
@@ -48,3 +48,20 @@ const dataCreator = () => {
 //         }
 //     })
 // }
+
+
+const dataCreator = () => {
+
+    for (let i = 9000000; i < 10000000; i++) {
+        let data = `${i+1} \n`
+
+        fs.appendFileSync('uuid.csv', data, (err) => {
+            if (err) {
+                console.log('error', err);
+            }
+        })
+        
+    };
+}
+
+dataCreator();
