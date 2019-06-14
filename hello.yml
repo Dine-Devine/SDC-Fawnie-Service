@@ -3,8 +3,9 @@ config:
   http:
     pool: 10
   phases:
-    - duration: 60
-      arrivalRate: 50
+    - duration: 300
+      arrivalRate: 300
+      rampTo: 500
   payload:
     path: "./uuid.csv" 
     fields:
@@ -14,6 +15,12 @@ scenarios:
         - loop:
             - get:
                 url: "/readRecord?uuid={{uuid}}"
+            - get:
+                url: "/readRecord?uuid={{uuid}}"
+            - get:
+                url: "/readRecord?uuid={{uuid}}"
+           
+         
           count: 1
   
     

@@ -1,5 +1,7 @@
 const {Client} = require('pg');
 
+require('dotenv').config();
+
 const pgUser = process.env.PG_USER;
 const pgPASS = process.env.PG_PASS;
 
@@ -12,13 +14,6 @@ const client = new Client({
 })
 client.connect()
 
-// client.query('SELECT NOW()', (err, res) => {
-//     console.log(err, res)
-//     client.end()
-//   })
-
-
-  
   
 let createData = (obj, cb) => {
     const text = `INSERT INTO data (uuid, name, bld, category, images) 
